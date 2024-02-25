@@ -1,14 +1,52 @@
-/*.header{
+.header{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin: 0 30px;
+    justify-content: center;
 }
 
 .app-body{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
-*/
+
+.app-body h1{
+    display: flex;
+    justify-content: center;
+    color: #007CFF;
+}
+
+.todaysDate{
+    display: flex;
+    justify-content: center;
+}
+
+.task-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.formLine {
+    border: 1px solid black;
+    padding: 5px 5px;
+}
+
+.remaining_tasks {
+    margin-top: -10px;
+    margin-bottom: 0px;
+}
+
+.fullWidthLine {
+    margin: 30px 0;
+    width: 80%;
+    height: 2px;
+    background-color: black;
+
+}
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
