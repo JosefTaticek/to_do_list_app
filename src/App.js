@@ -1,28 +1,25 @@
 import React from 'react'
-import {useState} from "react"
+import { useState } from "react"
 
 const App = () => {
-  const [taskName, setTaskName] = useState("") //This will handle the content from form
-  const [enteredTasks, setEnteredTasks] = useState([]) //Objects array, handle the form submit
+  const [taskName, setTaskName] = useState("")
+  const [enteredTasks, setEnteredTasks] = useState([])
 
-  
   const today = new Date();
   const formattedDate = today.toLocaleDateString('cs-CZ');
-  
 
-  const formSubmit = (event) => { 
-    event.preventDefault(); // Prevent the constant reloading of the webpage
+  const formSubmit = (event) => {
+    event.preventDefault();
 
-    if (taskName) { //SAVING VALUES TO OBJECTS + CONTROL MECHANISM
-      const newTaskObject = { task: taskName, completed: false }; // Correctly define a new task object
-      setEnteredTasks(currentTasks => [...currentTasks, newTaskObject]); // Correctly add the new task to the array
+    if (taskName) {
+      const newTaskObject = { task: taskName, completed: false };
+      setEnteredTasks(currentTasks => [...currentTasks, newTaskObject]);
     } else {
       console.log("Task field was empty.");
     }
-    setTaskName(""); // Correctly reset the task input field to empty
+    setTaskName("");
   };
 
-  
   const toggleTaskCompletion = (index) => {
     const newTasks = enteredTasks.map((task, taskIndex) => {
       if (taskIndex === index) {
@@ -31,75 +28,61 @@ const App = () => {
       return task;
     });
     setEnteredTasks(newTasks);
-  };  
-    const removeAllTasks=()=>setEnteredTasks([]) //REMOVE ALL TASKS FUNCTION
+  };
 
+  const removeAllTasks = () => setEnteredTasks([])
 
-  return <div>
-    <div className="header">
-      <p></p>
-    </div>
-
-
-    <div className="app-body">
-      <div>
-        <h1>To-Do List app</h1>
+  return (
+    <div>
+      <div className="header"></div>
+      <div className="app-body">
+        <div className="form">
+          <div className="formUpperPart">
+            <h1>To-Do List</h1>
+            <p className="todaysDate">{formattedDate}</p>
+          </div>
+          <div className="formLine">
+            <form onSubmit={formSubmit}>
+              <input
+                type="text"
+                placeholder="Enter the task"
+                value={taskName}
+                onChange={(event) => setTaskName(event.target.value)}
+                className="enterTaskButton"
+              />
+              <input
+                type="Submit"
+                value="Add task"
+                className="submitButton"
+              />
+            </form>
+          </div>
+        </div>
         
-        <p className="todaysDate">Today's date is: {formattedDate}</p>
+        <div className="fullWidthLine"></div>
 
-        <div className="formLine">
-          <form onSubmit={formSubmit}>
-            <input 
-              type="text" 
-              placeholder="Enter the task" 
-              value={taskName}
-              onChange={(event)=>setTaskName(event.target.value)}/> {/*Once anything changes here, it will be catched to setTaskName and refreshed (e.tar.value will be changed to value*/}
-            <input 
-              type="Submit" 
-              value="Add task"/>
-          </form>
+        <div className="contentBelowLine">
+          {enteredTasks.map((oneTask, index) => (
+            <div className="task-item" key={index}>
+              <input
+                type="checkbox"
+                checked={oneTask.completed}
+                onChange={() => toggleTaskCompletion(index)}
+              />
+              <h4 style={{ textDecoration: oneTask.completed ? 'line-through' : 'none' }}>
+                {oneTask.task}
+              </h4>
+            </div>
+          ))}
+          <p className="remaining_tasks">Remaining tasks: {enteredTasks.length}</p>
+          <div className="removeAllTasksButton">
+            <input type="button" value="Remove all tasks" onClick={removeAllTasks} className="removeAllTasks"/>
+          </div>
         </div>
       </div>
-
-
-      <div className="fullWidthLine">
-      </div>
-
-
-      <div> {/*MAPPING OF TASKS*/}
-        <p className="remaining_tasks">Remaining tasks: {enteredTasks.length}</p>
-        {enteredTasks.map((oneTask, index) => {// Make sure to access the correct property (`task`) from each task object
-
-
-        return (
-          <div className="task-item" key={index}>
-              <input 
-              type="checkbox"
-              checked={oneTask.completed}
-              onChange={()=>toggleTaskCompletion(index)}/>
-              <h4 style={{ textDecoration: oneTask.completed ? 'line-through' : 'none' }}>
-              {oneTask.task}
-            </h4>
-          </div>
-          );
-        })}
-      </div>
-
-
-      <div>
-        <input type="button" value="Remove all tasks" onClick={removeAllTasks}/>
-      </div>
-      
-
-      <div className="fullWidthLine">
-      </div>
+      <div className="footer"></div>
     </div>
-
-
-    <div className="footer">
-      <p></p>
-    </div>
-  </div>
+  );
 }
 
-export default App
+export default App;

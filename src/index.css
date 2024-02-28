@@ -1,3 +1,12 @@
+body {
+    height: 100vh;
+    background-color: #e9fbfe;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 100px;
+}
+
 .header{
     display: flex;
     flex-direction: row;
@@ -8,41 +17,89 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 10px;
+    box-shadow: 0px 5px 115px rgba(160,234,249,255);
+    width: 400px;
+    height: 600px;
+    background: linear-gradient(to right, #4ac7fc, #2df2ff);
 }
 
-.app-body h1{
-    display: flex;
-    justify-content: center;
-    color: #007CFF;
+.enterTaskButton{
+    border: 1px solid #ccc;
+    background-color: white;
+    color: black;
+    cursor: pointer;
 }
+
+.submitButton{
+    border: 1px solid #ccc;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.form{
+}
+
+.formUpperPart {
+    color: white;
+}
+
 
 .todaysDate{
     display: flex;
     justify-content: center;
+    font-size: 20px;
 }
 
-.task-item{
+
+.formUpperPart h1 {
+    color: white;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    justify-content: center;
+    margin-bottom: -15px;
 }
 
 .formLine {
-    border: 1px solid black;
+    border: 1px solid white;
+    border-radius: 5px;
     padding: 5px 5px;
-}
-
-.remaining_tasks {
-    margin-top: -10px;
-    margin-bottom: 0px;
 }
 
 .fullWidthLine {
     margin: 30px 0;
     width: 80%;
     height: 2px;
-    background-color: black;
+    background-color: white;
 
+}
+
+.task-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 0;
+}
+
+.task-item h4 {
+    margin-bottom: 10px; 
+    margin-top: 10px;
+}
+
+.remaining_tasks {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.removeAllTasks {
+    border: 1px solid #ccc;
+    background-color: white;
+    color: black;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 .footer{
@@ -50,3 +107,4 @@
     flex-direction: row;
     justify-content: center;
 }
+
