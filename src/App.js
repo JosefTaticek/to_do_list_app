@@ -5,19 +5,19 @@ const App = () => {
   const [taskName, setTaskName] = useState("")
   const [enteredTasks, setEnteredTasks] = useState([])
 
-  const today = new Date();
+  const today = new Date(); //Today's date
   const formattedDate = today.toLocaleDateString('cs-CZ');
 
   const formSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //Multiple loading prevention
 
-    if (taskName) {
+    if (taskName) { //Saving the entered tasks to an object
       const newTaskObject = { task: taskName, completed: false };
       setEnteredTasks(currentTasks => [...currentTasks, newTaskObject]);
     } else {
       console.log("Task field was empty.");
     }
-    setTaskName("");
+    setTaskName(""); 
   };
 
   const toggleTaskCompletion = (index) => {
@@ -29,6 +29,11 @@ const App = () => {
     });
     setEnteredTasks(newTasks);
   };
+
+  const removeCompletedTasks = ()=>{
+    const remainingTasks = enteredTasks.filter(task => !task.completed);
+    setEnteredTasks(remainingTasks);
+  }
 
   const removeAllTasks = () => setEnteredTasks([])
 
@@ -75,6 +80,9 @@ const App = () => {
             </div>
           ))}
           <p className="remaining_tasks">Remaining tasks: {enteredTasks.length}</p>
+          <div>
+            <input type="button" value="Remove completed tasks" onClick={removeCompletedTasks} className="removeCompletedTasks"/>
+          </div>
           <div className="removeAllTasksButton">
             <input type="button" value="Remove all tasks" onClick={removeAllTasks} className="removeAllTasks"/>
           </div>
